@@ -43,25 +43,33 @@ class Student
   end
 
   def self.create(name:, grade:)
-    student = Student.new(name, grade) 
-    student.save 
+    student = Student.new(name, grade)
+    student.save
     student
   end
 
   def self.new_from_db(row)
-    student = Student.new 
+    student = Student.new
     student.id = row[0]
     student.name = row[1]
-    student.grade = row[2] 
+    student.grade = row[2]
     student 
   end
 
   def self.find_by_name(name)
-
+    sql = <<-SQL 
+      SELECT * FROM students 
+      WHERE name = ? 
+      LIMIT 1 
+    SQL 
+    
+    DB[:conn].execute(sql, name).map do |row|
+      self.new_from_db(row)
+    end.first 
   end
 
   def update
-    
+
   end
 
 end
