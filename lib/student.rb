@@ -14,13 +14,13 @@ class Student
   end
 
   def self.create_table
-    sql = <<-SQL 
+    sql = <<-SQL
       CREATE TABLE students(
         ID INTEGER PRIMARY KEY,
         name TEXT,
         grade TEXT
       )
-    SQL 
+    SQL
     DB[:conn].execute(sql) 
   end
 
@@ -46,6 +46,6 @@ class Student
 
   def update
 
-  end 
+  end
 
 end
